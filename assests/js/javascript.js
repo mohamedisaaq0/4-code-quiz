@@ -16,7 +16,8 @@ var score = 0;
 
 var FullnameContainer = document.getElementById("full-name")
 var scoreContainer = document.getElementById("score-number")
-
+var highscore = document.getElementById("highscore")
+var timeValue = 60
 //TODO: remove local storage
 
 // current question index
@@ -80,14 +81,11 @@ const questions = [
 
 ];
 
-
-
 // event handler function to handle click events in question section
 const handleOptionClick = (event) => {
   console.log("clicked somewhere in question section");
 
   // get current target
-  const currentTarget = event.currentTarget;
 
   // get target
   const target = event.target;
@@ -105,13 +103,15 @@ const handleOptionClick = (event) => {
     console.log(value)
     if(value === "true"){
       score++;
-    };
-  
+    } else if (value === "false"){
+      timeValue -= 10;
+    }
+
     const result = {
       question,
       value
     };
-    console.log(score)
+    console.log(result)
     
     // store answer in local storage
     localStorage.setItem("score", JSON.stringify(score));
@@ -138,7 +138,7 @@ const handleOptionClick = (event) => {
 const handleFormSubmit = (event) => {
   event.preventDefault();
   // get full name from input
-  clearInterval();
+  
   const fullName = document.getElementById("full-name").value;
  console.log(fullName);
   // validate
@@ -154,9 +154,7 @@ const handleFormSubmit = (event) => {
     // push the results back to LS
     storeInLS("allResults", result);
 
-    // clear Results
-    // localStorage.removeItem("score");
-
+   
     // remove form
     document.getElementById("feedback-form").remove();
 
@@ -176,6 +174,12 @@ const handleFormSubmit = (event) => {
     alert("Please enter your intials!");
   }
 };
+highscore.addEventListener("click", function(event){
+  event.preventDefault();
+  console.log("hi")
+
+})
+
 
 // function to render the results
 const renderResults = () => {
@@ -232,6 +236,7 @@ const renderForm = () => {
 const renderQuestion = () => {
   console.log("render question");
 
+  
   // get current question
   const currentQuestion = questions[questionIndex];
 
@@ -272,6 +277,8 @@ const renderQuestion = () => {
 
   // add event listener on question section
   section.addEventListener("click", handleOptionClick);
+
+  startTime()
 };
 
 
@@ -318,7 +325,7 @@ const storeInLS = (key, value) => {
   const arrayFromLS = JSON.parse(localStorage.getItem(key));
 
   // push answer in to array
-  // arrayFromLS.push(value);
+     arrayFromLS.push(value);
 
   // set feedbackResults in LS
   localStorage.setItem(key, JSON.stringify(arrayFromLS));
@@ -341,34 +348,32 @@ const handleStartButtonClick = () => {
   renderQuestion();
   
 
-  startTime(60,timeEl)
+  
 
 };
 
 
-const startTime = (duration, display) => {
-  var timer = duration, minutes, seconds;
-  var timerInterval = setInterval(function () {
-      minutes = parseInt(timer / 60, 10);
-      seconds = parseInt(timer % 60, 10);
-
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      display.textContent = minutes + ":" + seconds;
-
-      if (--timer < 0) {
-        clearInterval(timerInterval);
-          timer = duration;
-          alert("Time is up!!")
+const startTime = () => {
+  var timeInterval = setInterval(function () {
+    
+   
+    timeValue--;
+    console.log(timeValue);
+    
+    
+    if (timeValue === 0) {
+        alert("Time is up!!");
           removeBanner();
           removeQuestion();
           renderForm();
           removeTimer();
-      }
-
-  }, 1000);
+          clearInterval()
+    }
+    timeEl.textContent = timeValue
+  },1000);
 }
+
 
 // add event listener to start button
 startButton.addEventListener("click", handleStartButtonClick);
+
