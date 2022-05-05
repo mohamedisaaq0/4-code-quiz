@@ -138,6 +138,7 @@ const handleOptionClick = (event) => {
 const handleFormSubmit = (event) => {
   event.preventDefault();
   // get full name from input
+  clearInterval();
   const fullName = document.getElementById("full-name").value;
  console.log(fullName);
   // validate
@@ -359,6 +360,7 @@ const startTime = (duration, display) => {
       if (--timer < 0) {
         clearInterval(timerInterval);
           timer = duration;
+          alert("Time is up!!")
           removeBanner();
           removeQuestion();
           renderForm();
