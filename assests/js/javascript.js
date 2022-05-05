@@ -28,35 +28,56 @@ const options = ["false", "true"];
 // all questions array
 const questions = [
   {
-    text: "Inside which HTML element do we put the JavaScript?",
+    text: "javascript must be in the< body > tag to work:",
     options,
     correctAnswer: "true",
   },
   {
-    text: "Would you like to see a prequel to this Spider-Man series?",
+    text: "We can find errors in code only when we test the program",
+    options,
+    correctAnswer: "false",
+  },
+  {
+    text: "An error in code is known as a bug",
     options,
     correctAnswer: "true",
   },
   {
-    text: "Would you like to watch Venom and Spider-Man battle in the next movie?",
+    text: ">= stands for not equal to",
     options,
-    correctAnswer: "true",
+    correctAnswer: "false",
   },
   {
-    text: "Would you like to watch Miles Morales and Spider-Man in the next movie?",
+    text: "An if statement must have an else clause attached",
     options,
-    correctAnswer: "true",
+    correctAnswer: "false",
   },
   {
-    text: "Would you like to watch a Spider-Man series on just Miles Morales?",
-    options,
-    correctAnswer: "true",
-  },
-  {
-    text: "Would you like watching an animated series on Spider-Man?",
+    text: "two or more conditions can be added using && and ||",
     options, 
     correctAnswer: "true",
+  },
+  {
+    text: "two or more conditions can be added using && and ||",
+    options, 
+    correctAnswer: "true",
+  },
+  {
+    text: "prompt, parseInt and document.write are keywords we use to function something in javascript",
+    options, 
+    correctAnswer: "true",
+  },
+  {
+    text: "% is a valid mathematical operator",
+    options, 
+    correctAnswer: "true",
+  },
+  {
+    text: "document.write(sum=a+b ) is a valid javascript statement.",
+    options, 
+    correctAnswer: "false",
   }
+
 ];
 
 
@@ -133,7 +154,7 @@ const handleFormSubmit = (event) => {
     storeInLS("allResults", result);
 
     // clear Results
-    localStorage.removeItem("score");
+    // localStorage.removeItem("score");
 
     // remove form
     document.getElementById("feedback-form").remove();
@@ -319,7 +340,7 @@ const handleStartButtonClick = () => {
   renderQuestion();
   
 
-  startTime(60 * 5,timeEl)
+  startTime(60,timeEl)
 
 };
 
