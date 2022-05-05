@@ -105,13 +105,14 @@ const handleOptionClick = (event) => {
       score++;
     } else if (value === "false"){
       timeValue -= 10;
+      clearInterval(startTime);
     }
 
     const result = {
       question,
       value
     };
-    console.log(result)
+    console.log();
     
     // store answer in local storage
     localStorage.setItem("score", JSON.stringify(score));
@@ -149,6 +150,7 @@ const handleFormSubmit = (event) => {
     // build object with fullName and results
     const result = {
       fullName,
+      score
     };
 
     // push the results back to LS
@@ -278,7 +280,7 @@ const renderQuestion = () => {
   // add event listener on question section
   section.addEventListener("click", handleOptionClick);
 
-  startTime()
+  
 };
 
 
@@ -347,7 +349,9 @@ const handleStartButtonClick = () => {
   // render question
   renderQuestion();
   
-
+  // start timer
+  
+  startTime();
   
 
 };
@@ -355,10 +359,8 @@ const handleStartButtonClick = () => {
 
 const startTime = () => {
   var timeInterval = setInterval(function () {
-    
-   
     timeValue--;
-    console.log(timeValue);
+    
     
     
     if (timeValue === 0) {
@@ -366,13 +368,13 @@ const startTime = () => {
           removeBanner();
           removeQuestion();
           renderForm();
-          removeTimer();
-          clearInterval()
+          removeTimer();     
     }
     timeEl.textContent = timeValue
+    clearInterval(startTime);
   },1000);
 }
-
+ 
 
 // add event listener to start button
 startButton.addEventListener("click", handleStartButtonClick);
