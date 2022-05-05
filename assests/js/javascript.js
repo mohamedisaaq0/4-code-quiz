@@ -280,7 +280,7 @@ const renderQuestion = () => {
   // add event listener on question section
   section.addEventListener("click", handleOptionClick);
 
-  
+  clearInterval(startTime);
 };
 
 
@@ -306,7 +306,7 @@ const removeTimer = () => {
 const initialiseLocalStorage = () => {
   // get feedbackResults from LS
   const feedbackResultsFromLS = JSON.parse(
-    localStorage.getItem("feedbackResults")
+    localStorage.getItem("Results")
   );
 
   const allResultsFromLS = JSON.parse(localStorage.getItem("allResults"));
@@ -338,7 +338,6 @@ const handleStartButtonClick = () => {
   console.log("start button clicked");
 
 
-  // initialise timer
 
   // initialise local storage
   initialiseLocalStorage();
@@ -361,17 +360,15 @@ const startTime = () => {
   var timeInterval = setInterval(function () {
     timeValue--;
     
-    
-    
     if (timeValue === 0) {
-        alert("Time is up!!");
           removeBanner();
           removeQuestion();
           renderForm();
-          removeTimer();     
+          removeTimer(); 
+          clearInterval();  
     }
     timeEl.textContent = timeValue
-    clearInterval(startTime);
+    
   },1000);
 }
  
