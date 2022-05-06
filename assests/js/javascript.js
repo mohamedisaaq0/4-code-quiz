@@ -176,11 +176,6 @@ const handleFormSubmit = (event) => {
     alert("Please enter your intials!");
   }
 };
-highscore.addEventListener("click", function(event){
-  event.preventDefault();
-  console.log("hi")
-
-})
 
 
 // function to render the results
