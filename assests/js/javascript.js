@@ -357,6 +357,7 @@ const startTime = () => {
     
     if (timeValue === 0) {
           removeBanner();
+          removeQuestion();
           renderForm();
           removeTimer(); 
           clearInterval();  
