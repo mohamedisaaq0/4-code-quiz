@@ -18,7 +18,8 @@ var FullnameContainer = document.getElementById("full-name")
 var scoreContainer = document.getElementById("score-number")
 var highscore = document.getElementById("highscore")
 var timeValue = 60
-//TODO: remove local storage
+
+var timeInterval = null;
 
 // current question index
 let questionIndex = 0;
@@ -289,7 +290,7 @@ const removeBanner = () => {
 // function to remove question section from page
 const removeQuestion = () => {
   console.log("remove question");
-  document.getElementById("question-container").remove();
+  document.getElementById("question-container").remove()
 };
 
 // function to remove timer
@@ -352,7 +353,7 @@ const handleStartButtonClick = () => {
 
 
 const startTime = () => {
-  var timeInterval = setInterval(function () {
+timeInterval = setInterval(function () {
     timeValue--;
     
     if (timeValue <= 0) {
@@ -360,7 +361,7 @@ const startTime = () => {
           removeQuestion();
           renderForm();
           removeTimer(); 
-          clearInterval();  
+          clearInterval(timeInterval);  
     }
     timeEl.textContent = timeValue
     
